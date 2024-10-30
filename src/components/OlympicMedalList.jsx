@@ -1,6 +1,6 @@
 import Button from './Button';
 
-function OlympicMedalList({ medalList, deleteMedalRecord}) {
+function OlympicMedalList({ medalList, deleteMedalRecord }) {
   return (
     <table className="medal-list">
       <thead>
@@ -13,19 +13,21 @@ function OlympicMedalList({ medalList, deleteMedalRecord}) {
         </tr>
       </thead>
       <tbody>
-        {medalList.map(({ id, country, gold, silver, bronze }) => {
-          return (
-            <tr className="medal-list__row" key={id}>
-              <td className="medal-list__col">{country}</td>
-              <td className="medal-list__col">{gold}</td>
-              <td className="medal-list__col">{silver}</td>
-              <td className="medal-list__col">{bronze}</td>
-              <td className="medal-list__col">
-                <Button value="삭제" onClick={() => deleteMedalRecord(id)}/>
-              </td>
-            </tr>
-          );
-        })}
+        {medalList
+          .toSorted((a, b) => b.gold - a.gold)
+          .map(({ key, country, gold, silver, bronze }) => {
+            return (
+              <tr className="medal-list__row" key={key}>
+                <td className="medal-list__col">{country}</td>
+                <td className="medal-list__col">{gold}</td>
+                <td className="medal-list__col">{silver}</td>
+                <td className="medal-list__col">{bronze}</td>
+                <td className="medal-list__col">
+                  <Button value="삭제" onClick={() => deleteMedalRecord(key)} />
+                </td>
+              </tr>
+            );
+          })}
       </tbody>
     </table>
   );

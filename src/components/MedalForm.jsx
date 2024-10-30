@@ -2,13 +2,15 @@ import LabeledInput from './LabeledInput';
 import Button from './Button';
 import { useState } from 'react';
 
+const initialFormData = {
+  country: '',
+  gold: '',
+  silver: '',
+  bronze: '',
+};
+
 function MedalForm({ onSubmit }) {
-  const [formData, setFormData] = useState({
-    country: '',
-    gold: '',
-    silver: '',
-    bronze: '',
-  });
+  const [formData, setFormData] = useState(initialFormData);
 
   const inputFields = [
     { id: 'country', label: '국가', placeholder: '국가 이름', type: 'text' },
@@ -22,7 +24,8 @@ function MedalForm({ onSubmit }) {
       className="header__form"
       onSubmit={(e) => {
         e.preventDefault();
-        onSubmit({ newMedalRecord: formData, id: new Date().getTime() });
+        onSubmit({ ...formData, key: new Date().getTime() });
+        setFormData(initialFormData);
       }}
     >
       {inputFields.map((field) => {

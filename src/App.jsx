@@ -6,12 +6,12 @@ import OlympicMedalList from './components/OlympicMedalList';
 function App() {
   const [medalList, setMedalList] = useState([]);
 
-  const handleFormSubmit = ({ newMedalRecord }) => {
+  const handleFormSubmit = (newMedalRecord) => {
     setMedalList([...medalList, newMedalRecord]);
   };
 
-  const handleDeleteButtonClick = (id) => {
-    setMedalList(medalList.filter((medal) => medal.id !== id));
+  const handleDeleteButtonClick = (key) => {
+    setMedalList(medalList.filter((medal) => medal.key !== key));
   };
 
   return (
