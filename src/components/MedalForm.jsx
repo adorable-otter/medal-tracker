@@ -24,7 +24,11 @@ function MedalForm({ onSubmit, updateMedalRecord }) {
       className="header__form"
       onSubmit={(e) => {
         e.preventDefault();
-        onSubmit({ ...formData, key: new Date().getTime() });
+        onSubmit({
+          ...formData,
+          key: new Date().getTime(),
+          medalsCount: Number(formData.gold) + Number(formData.silver) + Number(formData.bronze),
+        });
         setFormData(initialFormData);
       }}
     >
@@ -34,7 +38,7 @@ function MedalForm({ onSubmit, updateMedalRecord }) {
         );
       })}
       <Button value="추가 하기" type="submit" />
-      <Button value="업데이트" type="button" onClick={() => updateMedalRecord(formData)}/>
+      <Button value="업데이트" type="button" onClick={() => updateMedalRecord(formData)} />
     </form>
   );
 }

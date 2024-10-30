@@ -5,7 +5,6 @@ function LabeledInput({ inputData, value, setValue }) {
     const newValue = {...value};
     newValue[id] = e.target.value;
     setValue(newValue);
-    console.log(newValue[id]);
   };
 
   return (
