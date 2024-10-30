@@ -3,9 +3,10 @@ import './App.css';
 import Header from './components/Header';
 import OlympicMedalList from './components/OlympicMedalList';
 import SortOptions from './components/SortOptions';
+import { storage } from './storage';
 
 function App() {
-  const [medalList, setMedalList] = useState([]);
+  const [medalList, setMedalList] = useState(storage.getContentList());
   const [sortOption, setSortOption] = useState('goldMedal');
 
   const handleFormSubmit = (newMedalRecord) => {
@@ -15,8 +16,9 @@ function App() {
     setMedalList([...medalList, newMedalRecord]);
   };
 
-  const handleDeleteButtonClick = (key) => {
-    setMedalList(medalList.filter((medal) => medal.key !== key));
+  const handleDeleteButtonClick = (id) => {
+    setMedalList(medalList.filter((medal) => medal.id !== id));
+    storage.delete(id);
   };
 
   const handleUpdateButtonClick = (update) => {
@@ -29,6 +31,8 @@ function App() {
         return medal;
       })
     );
+    storage.add(update);
+    // update랑 target이랑 id가 다름. 시간이 변경돼서
   };
 
   const sortOptions = {
@@ -51,12 +55,5 @@ function App() {
     </div>
   );
 }
-
-// const sumProperties = (obj) => {
-//   Object.values(obj).reduce((acc, curr) => {
-//     if (isNaN(curr)) return acc;
-//     return acc + Number(curr);
-//   }, 0);
-// };
 
 export default App;

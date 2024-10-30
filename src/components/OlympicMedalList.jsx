@@ -13,15 +13,15 @@ function OlympicMedalList({ medalList, deleteMedalRecord }) {
         </tr>
       </thead>
       <tbody>
-        {medalList.map(({ key, country, gold, silver, bronze }) => {
+        {medalList.map(({ id, country, gold, silver, bronze }) => {
           return (
-            <tr className="medal-list__row" key={key}>
+            <tr className="medal-list__row" key={id}>
               <td className="medal-list__col">{country}</td>
               <td className="medal-list__col">{gold}</td>
               <td className="medal-list__col">{silver}</td>
               <td className="medal-list__col">{bronze}</td>
               <td className="medal-list__col">
-                <Button value="삭제" onClick={() => deleteMedalRecord(key)} />
+                <Button value="삭제" onClick={() => deleteMedalRecord(id)} />
               </td>
             </tr>
           );
