@@ -9,7 +9,7 @@ const initialFormData = {
   bronze: '',
 };
 
-function MedalForm({ onSubmit }) {
+function MedalForm({ onSubmit, updateMedalRecord }) {
   const [formData, setFormData] = useState(initialFormData);
 
   const inputFields = [
@@ -34,7 +34,7 @@ function MedalForm({ onSubmit }) {
         );
       })}
       <Button value="추가 하기" type="submit" />
-      <Button value="업데이트" />
+      <Button value="업데이트" type="button" onClick={() => updateMedalRecord(formData)}/>
     </form>
   );
 }

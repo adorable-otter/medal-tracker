@@ -14,9 +14,22 @@ function App() {
     setMedalList(medalList.filter((medal) => medal.key !== key));
   };
 
+  const handleUpdateButtonClick = (update) => {
+    if (!medalList.find((medal) => medal.country === update.country)) {
+      alert('등록되지 않은 국가입니다.');
+      return;
+    }
+    setMedalList(
+      medalList.map((medal) => {
+        if (medal.country === update.country) return update;
+        return medal;
+      })
+    );
+  };
+
   return (
     <div className="container">
-      <Header onSubmit={handleFormSubmit} />
+      <Header onSubmit={handleFormSubmit} updateMedalRecord={handleUpdateButtonClick} />
       <OlympicMedalList medalList={medalList} deleteMedalRecord={handleDeleteButtonClick} />
     </div>
   );
