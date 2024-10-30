@@ -1,5 +1,5 @@
-function Button({ value, type }) {
-  return <button type={type}>{value}</button>;
+function Button({ value, type, onClick }) {
+  return <button onClick={onClick} type={type}>{value}</button>;
 }
 
 export default Button;

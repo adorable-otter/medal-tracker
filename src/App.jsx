@@ -1,18 +1,23 @@
 import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
-import OlympicMedalList from './components/OlymphicMedalList';
+import OlympicMedalList from './components/OlympicMedalList';
 
 function App() {
   const [medalList, setMedalList] = useState([]);
 
-  const handleSubmit = () => {};
+  const handleFormSubmit = ({ newMedalRecord }) => {
+    setMedalList([...medalList, newMedalRecord]);
+  };
+
+  const handleDeleteButtonClick = () => {
+
+  };
 
   return (
     <div className="container">
-      <Header />
-      <OlympicMedalList />
-      {/* <div className="main"></div> */}
+      <Header onSubmit={handleFormSubmit} />
+      <OlympicMedalList medalList={medalList} />
     </div>
   );
 }

@@ -1,8 +1,17 @@
-function LabeledInput({ id, label, holder }) {
+function LabeledInput({ inputData, value, setValue }) {
+  const { id, label, placeholder } = inputData;
+
+  const handleInputChange = (e) => {
+    const newValue = {...value};
+    newValue[id] = e.target.value;
+    setValue(newValue);
+    console.log(newValue[id]);
+  };
+
   return (
     <div className="labeled-input">
-      <label for={id}>{label}</label>
-      <input name={id} placeholder={holder}></input>
+      <label htmlFor={id}>{label}</label>
+      <input onChange={handleInputChange} name={id} placeholder={placeholder} value={value[id]}></input>
     </div>
   );
 }
