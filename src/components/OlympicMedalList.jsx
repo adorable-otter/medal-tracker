@@ -21,7 +21,7 @@ function OlympicMedalList({ medalList, deleteMedalRecord}) {
               <td className="medal-list__col">{silver}</td>
               <td className="medal-list__col">{bronze}</td>
               <td className="medal-list__col">
-                <Button value="삭제" onClick={deleteMedalRecord}/>
+                <Button value="삭제" onClick={() => deleteMedalRecord(id)}/>
               </td>
             </tr>
           );

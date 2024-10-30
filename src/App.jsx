@@ -10,14 +10,14 @@ function App() {
     setMedalList([...medalList, newMedalRecord]);
   };
 
-  const handleDeleteButtonClick = () => {
-
+  const handleDeleteButtonClick = (id) => {
+    setMedalList(medalList.filter((medal) => medal.id !== id));
   };
 
   return (
     <div className="container">
       <Header onSubmit={handleFormSubmit} />
-      <OlympicMedalList medalList={medalList} />
+      <OlympicMedalList medalList={medalList} deleteMedalRecord={handleDeleteButtonClick} />
     </div>
   );
 }
