@@ -2,39 +2,52 @@ import LabeledInput from './LabeledInput';
 import Button from './Button';
 import { useState } from 'react';
 import { storage } from '../storage';
+import { initialFormData, inputFields } from '../constant/medalForm';
 
-const initialFormData = {
-  country: '',
-  gold: '',
-  silver: '',
-  bronze: '',
-};
-
-function MedalForm({ onSubmit, updateMedalRecord }) {
+function MedalForm({ medalRecordList, setMedalRecordList }) {
   const [formData, setFormData] = useState(initialFormData);
 
-  const inputFields = [
-    { name: 'country', label: '국가', placeholder: '국가 이름', type: 'text' },
-    { name: 'gold', label: '금메달', placeholder: '금메달 개수', type: 'number' },
-    { name: 'silver', label: '은메달', placeholder: '은메달 개수', type: 'number' },
-    { name: 'bronze', label: '동메달', placeholder: '동메달 개수', type: 'number' },
-  ];
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const newMedalRecord = new MedalRecord(formData);
+    if (medalRecordList.find((medalRecord) => medalRecord.country === newMedalRecord.country)) {
+      return alert('이미 등록된 국가입니다.');
+    }
+    setMedalRecordList([...medalRecordList, newMedalRecord]);
+    storage.add(newMedalRecord);
+    setFormData(initialFormData);
+  };
 
-  const submitParams = {
-    ...formData,
-    id: new Date().getTime(),
-    sumOfMedals: Number(formData.gold) + Number(formData.silver) + Number(formData.bronze),
+  const onUpdate = () => {
+    const toUpdate = new MedalRecord(formData);
+    if (!medalRecordList.find((medalRecord) => medalRecord.country === toUpdate.country)) {
+      return alert('등록되지 않은 국가입니다.');
+    }
+    setMedalRecordList(
+      medalRecordList.map((medalRecord) => {
+        if (medalRecord.country === toUpdate.country) {
+          toUpdate.id = medalRecord.id;
+          return toUpdate;
+        }
+        return medalRecord;
+      })
+    );
+    storage.add(toUpdate);
+  };
+
+  function MedalRecord(data) {
+    const record = { ...data };
+    record.id = new Date().getTime();
+    record.sumOfMedals = sumMedals(formData);
+    return record;
+  }
+
+  const sumMedals = (medalRecord) => {
+    return Number(medalRecord.gold) + Number(medalRecord.silver) + Number(medalRecord.bronze);
   };
 
   return (
-    <form
-      className="header__form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit(submitParams);
-        setFormData(initialFormData);
-      }}
-    >
+    <form className="header__form" onSubmit={onSubmit}>
       {inputFields.map((field) => {
         return (
           <LabeledInput
@@ -46,7 +59,7 @@ function MedalForm({ onSubmit, updateMedalRecord }) {
         );
       })}
       <Button value="추가 하기" type="submit" />
-      <Button value="업데이트" type="button" onClick={() => updateMedalRecord(submitParams)} />
+      <Button value="업데이트" type="button" onClick={onUpdate} />
     </form>
   );
 }

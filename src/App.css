@@ -26,6 +26,12 @@
     justify-content: space-around;
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .labeled-input {
     display: flex;
     flex-direction: column;

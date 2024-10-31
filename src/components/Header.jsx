@@ -1,11 +1,11 @@
 import MedalInputForm from './MedalForm';
 
-function Header({ onSubmit, updateMedalRecord }) {
+function Header({ medalRecordList, setMedalRecordList }) {
   return (
-    <div className="header">
+    <header className="header">
       <h1>2024 파리 올림픽</h1>
-      <MedalInputForm onSubmit={onSubmit} updateMedalRecord={updateMedalRecord}/>
-    </div>
+      <MedalInputForm medalRecordList={medalRecordList} setMedalRecordList={setMedalRecordList} />
+    </header>
   );
 }
 

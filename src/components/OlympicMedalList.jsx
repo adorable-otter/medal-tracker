@@ -1,6 +1,13 @@
+import { storage } from '../storage';
 import Button from './Button';
 
-function OlympicMedalList({ medalRecordList, deleteMedalRecord }) {
+function OlympicMedalList({ medalRecordList, setMedalRecordList }) {
+
+  const handleDeleteButtonClick = (id) => {
+    setMedalRecordList(medalRecordList.filter((medalRecord) => medalRecord.id !== id));
+    storage.delete(id);
+  };
+
   return (
     <table className="medal-list">
       <thead>
@@ -21,7 +28,7 @@ function OlympicMedalList({ medalRecordList, deleteMedalRecord }) {
               <td className="medal-list__col">{silver}</td>
               <td className="medal-list__col">{bronze}</td>
               <td className="medal-list__col">
-                <Button value="삭제" onClick={() => deleteMedalRecord(id)} />
+                <Button value="삭제" onClick={() => handleDeleteButtonClick(id)} />
               </td>
             </tr>
           );
