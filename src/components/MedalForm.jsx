@@ -23,7 +23,7 @@ function MedalForm({ onSubmit, updateMedalRecord }) {
   const submitParams = {
     ...formData,
     id: new Date().getTime(),
-    medalsCount: Number(formData.gold) + Number(formData.silver) + Number(formData.bronze),
+    sumOfMedals: Number(formData.gold) + Number(formData.silver) + Number(formData.bronze),
   };
 
   return (
@@ -32,17 +32,21 @@ function MedalForm({ onSubmit, updateMedalRecord }) {
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(submitParams);
-        storage.add(submitParams);
         setFormData(initialFormData);
       }}
     >
       {inputFields.map((field) => {
         return (
-          <LabeledInput key={field.name} inputData={field} value={formData} setValue={setFormData} />
+          <LabeledInput
+            key={field.name}
+            inputData={field}
+            value={formData}
+            setValue={setFormData}
+          />
         );
       })}
       <Button value="추가 하기" type="submit" />
-      <Button value="업데이트" type="button" onClick={() => updateMedalRecord(formData)} />
+      <Button value="업데이트" type="button" onClick={() => updateMedalRecord(submitParams)} />
     </form>
   );
 }

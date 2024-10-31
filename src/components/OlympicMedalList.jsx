@@ -1,6 +1,6 @@
 import Button from './Button';
 
-function OlympicMedalList({ medalList, deleteMedalRecord }) {
+function OlympicMedalList({ medalRecordList, deleteMedalRecord }) {
   return (
     <table className="medal-list">
       <thead>
@@ -13,7 +13,7 @@ function OlympicMedalList({ medalList, deleteMedalRecord }) {
         </tr>
       </thead>
       <tbody>
-        {medalList.map(({ id, country, gold, silver, bronze }) => {
+        {medalRecordList.map(({ id, country, gold, silver, bronze }) => {
           return (
             <tr className="medal-list__row" key={id}>
               <td className="medal-list__col">{country}</td>

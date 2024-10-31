@@ -25,7 +25,7 @@ const storage = {
   },
 
   getContentList() {
-    return [...Object.values(this.storage)];
+    return Object.values(this.storage);
   },
 };
 
