@@ -5,8 +5,16 @@ import { storage } from '../storage';
 import { initialFormData, inputFields } from '../constant/medalForm';
 import { validator } from '../validator';
 
+// const initialValidState= {
+//   country: true,
+//   gold: true,
+//   silver: true,
+//   bronze: true,
+// };
+
 function MedalForm({ medalRecordList, setMedalRecordList }) {
   const [formData, setFormData] = useState(initialFormData);
+  // const [isValid, setIsValid] = useState(initialValidState)
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -55,6 +63,7 @@ function MedalForm({ medalRecordList, setMedalRecordList }) {
       bronze: [onlyNum],
     };
     const result = validate(formData, validations);
+    // setIsValid(result);
     return isValid(result);
   };
 
