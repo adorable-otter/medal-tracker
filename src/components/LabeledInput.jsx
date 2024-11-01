@@ -1,5 +1,5 @@
 function LabeledInput({ inputData, value, setValue }) {
-  const { name, label, placeholder } = inputData;
+  const { name, label, placeholder, type } = inputData;
 
   const handleInputChange = (e) => {
     const newValue = { ...value };
@@ -11,6 +11,7 @@ function LabeledInput({ inputData, value, setValue }) {
     <div className="labeled-input">
       <label htmlFor={name}>{label}</label>
       <input
+        type={type}
         onChange={handleInputChange}
         name={name}
         placeholder={placeholder}

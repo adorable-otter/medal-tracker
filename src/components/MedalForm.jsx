@@ -3,13 +3,15 @@ import Button from './Button';
 import { useState } from 'react';
 import { storage } from '../storage';
 import { initialFormData, inputFields } from '../constant/medalForm';
+import { validator } from '../validator';
 
 function MedalForm({ medalRecordList, setMedalRecordList }) {
   const [formData, setFormData] = useState(initialFormData);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const newMedalRecord = new MedalRecord(formData);
+    if (!validate(formData)) return alert('입력 데이터를 확인해주세요.');
+    const newMedalRecord = medalRecord(formData);
     if (medalRecordList.find((medalRecord) => medalRecord.country === newMedalRecord.country)) {
       return alert('이미 등록된 국가입니다.');
     }
@@ -19,7 +21,7 @@ function MedalForm({ medalRecordList, setMedalRecordList }) {
   };
 
   const onUpdate = () => {
-    const toUpdate = new MedalRecord(formData);
+    const toUpdate = medalRecord(formData);
     if (!medalRecordList.find((medalRecord) => medalRecord.country === toUpdate.country)) {
       return alert('등록되지 않은 국가입니다.');
     }
@@ -35,15 +37,25 @@ function MedalForm({ medalRecordList, setMedalRecordList }) {
     storage.add(toUpdate);
   };
 
-  function MedalRecord(data) {
+  const medalRecord = (data) => {
     const record = { ...data };
+    const medalNames = ['gold', 'silver', 'bronze'];
+    medalNames.forEach((medalName) => (record[medalName] = record[medalName] || '0'));
+    record.sumOfMedals = medalNames.reduce((acc, medalName) => acc + Number(record[medalName]), 0);
     record.id = new Date().getTime();
-    record.sumOfMedals = sumMedals(formData);
     return record;
-  }
+  };
 
-  const sumMedals = (medalRecord) => {
-    return Number(medalRecord.gold) + Number(medalRecord.silver) + Number(medalRecord.bronze);
+  const validate = (formData) => {
+    const { notEmpty, onlyNum, validate, isValid } = validator;
+    const validations = {
+      country: [notEmpty],
+      gold: [onlyNum],
+      silver: [onlyNum],
+      bronze: [onlyNum],
+    };
+    const result = validate(formData, validations);
+    return isValid(result);
   };
 
   return (
