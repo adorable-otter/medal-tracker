@@ -11,7 +11,7 @@ function OlympicMedalList({ medalRecordList, setMedalRecordList }) {
   return (
     <table className="medal-list">
       <thead>
-        <tr className="medal-list__row">
+        <tr className="medal-list__head">
           <th className="medal-list__col">국가명</th>
           <th className="medal-list__col">금메달</th>
           <th className="medal-list__col">은메달</th>
@@ -28,7 +28,7 @@ function OlympicMedalList({ medalRecordList, setMedalRecordList }) {
               <td className="medal-list__col">{silver}</td>
               <td className="medal-list__col">{bronze}</td>
               <td className="medal-list__col">
-                <Button value="삭제" onClick={() => handleDeleteButtonClick({ id, country })} />
+                <Button className="btn btn_delete" value="삭제" onClick={() => handleDeleteButtonClick({ id, country })} />
               </td>
             </tr>
           );

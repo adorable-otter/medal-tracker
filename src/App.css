@@ -16,12 +16,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: aqua;
+    margin-bottom: 10px;
+}
+
+.header__title {
+    color: navy;
 }
 
 .header__form {
     width: 100%;
-    background-color: cornflowerblue;
     display: flex;
     justify-content: space-around;
 }
@@ -39,12 +42,15 @@
 
 .medal-list {
     width: 100%;
-    background-color: brown;
+    border-radius: 4px;
 }
 
 .medal-list__row {
     display: flex;
     width: 100%;
+    align-items: center;
+    background-color: rgb(200, 229, 247);
+    padding: 1px;
 }
 
 .medal-list__col {
@@ -54,4 +60,48 @@
 
 .sort-option {
     margin-left: auto;
+}
+
+.medal-list__head {
+    background-color: navy;
+    color: white;
+    padding: 3px;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+label {
+    text-align: center;
+    font-weight: bold;
+}
+
+input {
+    height: 20px;
+}
+
+input[type=number] {
+    text-align: right;
+}
+
+.btn {
+    height: 30px;
+    width: 50px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn_large {
+    width: 60px;
+    height: 40px;
+    background-color: rgb(249, 249, 40);
+}
+
+.btn_delete {
+    background-color: #c04646;
+    color: white;
 }

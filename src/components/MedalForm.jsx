@@ -70,8 +70,8 @@ function MedalForm({ medalRecordList, setMedalRecordList }) {
           />
         );
       })}
-      <Button value="추가 하기" type="submit" />
-      <Button value="업데이트" type="button" onClick={onUpdate} />
+      <Button className="btn btn_large btn_yellow" value="추가 하기" type="submit" />
+      <Button className="btn btn_large btn_yellow" value="업데이트" type="button" onClick={onUpdate} />
     </form>
   );
 }
